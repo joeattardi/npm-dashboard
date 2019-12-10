@@ -38,6 +38,7 @@ export default function Package({ data, downloads }) {
         <div className={styles['downloads-title']}>Downloads</div>
         <div className={styles.downloads}>
           <DownloadCount label="Last week" count={downloads.lastWeek} />
+          <div style={{ flexGrow: 1 }}></div>
           <DownloadCount label="Last month" count={downloads.lastMonth} />
         </div>
       </div>
