@@ -8,6 +8,8 @@
     padding: 0.5rem;
     display: flex;
     align-items: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 
     h2 {
       margin: 0;
@@ -23,7 +25,10 @@
   .details {
     border: 1px solid #CCCCCC;
     border-top: none;
-    padding: 0.25rem;
+    padding: 0.5rem;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
     .version {
       display: flex;
@@ -34,6 +39,30 @@
         color: #666666;
         font-weight: normal;
       }
+    }
+
+    .scores {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .overall-score {
+        background: #3891A6;
+        color: #FFFFFF;
+        font-weight: bold;
+        padding: 0.5rem;
+        border-radius: 5px;
+      }
+    }
+
+    .downloads-title {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .downloads {
+      display: flex;
+      justify-content: center;
     }
   }
 }
