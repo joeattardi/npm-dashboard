@@ -18,7 +18,7 @@ export default function Package({ data, downloads }) {
     <div className={styles.package}>
       <div className={styles.name}>
         <FontAwesomeIcon icon={faBox} size="lg" /> 
-        <h2>{metadata.name}</h2>
+        <h2><a target="_blank" rel="noopener noreferrer" href={metadata.links.npm}>{metadata.name}</a></h2>
       </div>
       <div className={styles.details}>
         <div className={styles.version}>
@@ -37,9 +37,9 @@ export default function Package({ data, downloads }) {
         </div>
         <div className={styles['downloads-title']}>Downloads</div>
         <div className={styles.downloads}>
-          <DownloadCount label="Last week" count={downloads.lastWeek} />
+          {downloads && downloads.lastWeek ? <DownloadCount label="Last week" count={downloads.lastWeek} /> : null}
           <div style={{ flexGrow: 1 }}></div>
-          <DownloadCount label="Last month" count={downloads.lastMonth} />
+          {downloads && downloads.lastMonth ? <DownloadCount label="Last month" count={downloads.lastMonth} /> : null}
         </div>
       </div>
     </div>

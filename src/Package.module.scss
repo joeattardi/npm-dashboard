@@ -11,9 +11,18 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 
+    a {
+      color: #FFFFFF;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
     h2 {
       margin: 0;
-      margin-left: 0.25rem;
+      margin-left: 0.5rem;
       font-size: 1.1rem;
       flex-grow: 1;
       white-space: nowrap;
@@ -48,11 +57,12 @@
       margin: 0.5rem;
 
       .overall-score {
-        background: #3891A6;
+        background: #5D737E;
         color: #FFFFFF;
         font-weight: bold;
         padding: 0.5rem;
         border-radius: 5px;
+        margin-left: 1rem;
       }
     }
 

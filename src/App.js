@@ -1,21 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ReactTooltip from 'react-tooltip'
 
 import Header from './Header';
+import LoadingMessage from './LoadingMessage';
 import Package from './Package';
 
-import data from './data.json';
-import downloads from './downloads.json';
+import { getDownloadStatistics, getPackageData } from './apiClient';
 
 import styles from './App.module.scss';
 
+const packages = ['@joeattardi/emoji-button', 'promise-poller', 'json-colorizer', 'react'];
+
 function App() {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState({});
+  const [downloads, setDownloads] = useState({});
+
+  useEffect(() => {
+    loadData();
+
+    async function loadData() {
+      const packageData = await getPackageData(packages);
+      setData(packageData);
+
+      const downloadsData = await getDownloadStatistics(packages);
+      setDownloads(downloadsData);
+
+      setLoading(false);
+    }
+  }, []);
+
   return (
     <div id={styles.app}>
       <Header />
       <div id={styles.main}>
-        {Object.keys(data).map(pkg => <Package data={data[pkg]} downloads={downloads[pkg]} key={pkg} />)}
+        {isLoading ? <LoadingMessage /> : Object.keys(data).map(pkg => <Package data={data[pkg]} downloads={downloads[pkg]} key={pkg} />)}
       </div>
       <ReactTooltip effect="solid" />
     </div>
