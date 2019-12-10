@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { faBox, faTag } from '@fortawesome/free-solid-svg-icons';
+import { faBox, faCloudDownloadAlt, faStar, faTag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
@@ -27,6 +27,7 @@ export default function Package({ data, downloads }) {
           </div>
           <div className={styles.date}>{formatDistanceToNow(new Date(metadata.date), { addSuffix: true })}</div>
         </div>
+        <div className={styles['section-title']}><FontAwesomeIcon icon={faStar} /> Score</div>
         <div className={styles.scores}>
           <Score score={score.detail.quality} name="Quality" label="Q" />
           <Score score={score.detail.popularity} name="Popularity" label="P" />
@@ -35,7 +36,7 @@ export default function Package({ data, downloads }) {
             {getPercentage(score.final)}
           </div>
         </div>
-        <div className={styles['downloads-title']}>Downloads</div>
+        <div className={styles['section-title']}><FontAwesomeIcon icon={faCloudDownloadAlt} /> Downloads</div>
         <div className={styles.downloads}>
           {downloads && downloads.lastWeek ? <DownloadCount label="Last week" count={downloads.lastWeek} /> : null}
           <div style={{ flexGrow: 1 }}></div>

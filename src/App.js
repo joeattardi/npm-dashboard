@@ -28,16 +28,17 @@ function App() {
       setDownloads(downloadsData);
 
       setLoading(false);
+      ReactTooltip.rebuild();
     }
   }, []);
 
   return (
     <div id={styles.app}>
+      <ReactTooltip effect="solid" />
       <Header />
       <div id={styles.main}>
         {isLoading ? <LoadingMessage /> : Object.keys(data).map(pkg => <Package data={data[pkg]} downloads={downloads[pkg]} key={pkg} />)}
       </div>
-      <ReactTooltip effect="solid" />
     </div>
   );
 }

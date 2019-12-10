@@ -1,5 +1,5 @@
 .package {
-  margin: 0.5rem;
+  margin: 0.75rem;
   width: 20rem;
 
   .name {
@@ -63,12 +63,15 @@
         padding: 0.5rem;
         border-radius: 5px;
         margin-left: 1rem;
+        cursor: default;
+        user-select: none;
       }
     }
 
-    .downloads-title {
+    .section-title {
       text-align: center;
       margin-top: 0.5rem;
+      color: #4C5B5C;
     }
 
     .downloads {
