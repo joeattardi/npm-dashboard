@@ -1,0 +1,456 @@
+{
+  "@joeattardi/emoji-button": {
+    "analyzedAt": "2019-11-18T02:47:45.819Z",
+    "collected": {
+      "metadata": {
+        "name": "@joeattardi/emoji-button",
+        "scope": "joeattardi",
+        "version": "2.3.0",
+        "description": "Vanilla JavaScript emoji picker",
+        "keywords": ["emoji", "javascript"],
+        "date": "2019-11-18T02:47:35.176Z",
+        "author": {
+          "name": "Joe Attardi",
+          "email": "jattardi@gmail.com",
+          "url": "https://joeattardi.codes"
+        },
+        "publisher": { "username": "joeattardi", "email": "joe@attardi.net" },
+        "maintainers": [
+          { "username": "joeattardi", "email": "joe@attardi.net" }
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git+https://github.com/joeattardi/emoji-button.git"
+        },
+        "links": {
+          "npm": "https://www.npmjs.com/package/%40joeattardi%2Femoji-button",
+          "homepage": "https://github.com/joeattardi/emoji-button",
+          "repository": "https://github.com/joeattardi/emoji-button",
+          "bugs": "https://github.com/joeattardi/emoji-button/issues"
+        },
+        "license": "MIT",
+        "dependencies": {
+          "@fortawesome/fontawesome-svg-core": "^1.2.22",
+          "@fortawesome/free-regular-svg-icons": "^5.10.2",
+          "@fortawesome/free-solid-svg-icons": "^5.10.2",
+          "emoji-datasource": "^4.1.0",
+          "popper.js": "^1.15.0",
+          "tiny-emitter": "^2.1.0"
+        },
+        "devDependencies": {
+          "@babel/core": "^7.5.5",
+          "@babel/preset-env": "^7.5.5",
+          "eslint": "^6.4.0",
+          "eslint-config-prettier": "^6.3.0",
+          "eslint-plugin-prettier": "^3.1.0",
+          "jest": "^24.9.0",
+          "prettier": "^1.18.2",
+          "rollup": "^1.20.3",
+          "rollup-plugin-babel": "^4.3.3",
+          "rollup-plugin-commonjs": "^10.1.0",
+          "rollup-plugin-node-resolve": "^5.2.0",
+          "rollup-plugin-postcss": "^2.0.3"
+        },
+        "releases": [
+          {
+            "from": "2019-10-19T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 4
+          },
+          {
+            "from": "2019-08-20T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 4
+          },
+          {
+            "from": "2019-05-22T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 4
+          },
+          {
+            "from": "2018-11-18T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 4
+          },
+          {
+            "from": "2017-11-18T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 4
+          }
+        ],
+        "hasTestScript": true,
+        "hasSelectiveFiles": true,
+        "readme": "# Emoji Button\nVanilla JavaScript emoji picker 😎\n\n![Screenshot](https://user-images.githubusercontent.com/219285/69020624-22f3f300-0983-11ea-914a-f730d538c908.png)\n\n## Demo\n\n[https://joeattardi.github.io/emoji-button](https://joeattardi.github.io/emoji-button)\n\n## Features\n\n* 💻 Vanilla JS, use with any framework\n* 🔎 Emoji search\n* 👍🏼 Skin tone variations\n* ⏱ Recently used emojis\n\n## Installation\n\n    npm install --save @joeattardi/emoji-button\n\n## Basic usage\n\n```javascript\n  import EmojiButton from '@joeattardi/emoji-button';\n\n  const button = document.querySelector('#emoji-button');\n  const picker = new EmojiButton();\n\n  picker.on('emoji', emoji => {\n    document.querySelector('input').value += emoji;\n  });\n\n  button.addEventListener('click', () => {\n    picker.pickerVisible ? picker.hidePicker() : picker.showPicker(button);\n  });\n```\n\n## API\n\n### `new EmojiButton(options)`\n\nCreates an Emoji Button emoji picker.\n\n#### Options\n\n* `autoHide`: (boolean, default: `true`) Whether or not the picker should automatically be hidden when an emoji is clicked.\n\n* `autoFocusSearch`: (boolean, default: `true`) Whether or not to auto-focus the search field when the picker is shown.\n\n* `position`: The position to display the picker relative to the reference element. Valid values are:\n  * `auto`\n  * `auto-start`\n  * `auto-end`\n  * `top`\n  * `top-start`\n  * `top-end`\n  * `right`\n  * `right-start`\n  * `right-end`\n  * `bottom`\n  * `bottom-start`\n  * `bottom-end`\n  * `left`\n  * `left-start`\n  * `left-end`\n\n* `recentsCount`: (number, default: `50`): The maximum number of recent emojis to save.\n\n* `rootElement`: The root DOM node to attach the picker to. Defaults to the body if not passed in.\n\n* `showPreview`: (boolean, default: `true`) Whether or not to show the emoji preview area.\n\n* `showSearch`: (boolean, default: `true`) Whether or not to show the search bar.\n\n* `showRecents`: (boolean, default: `true`) Whether or not to show (and save) recently used emojis.\n\n* `showVariants`: (boolean, default: `true`) Whether or not to show skin tone variants.\n\n* `i18n`: An object containing localized messages to display in the UI. The values and their defaults are as follows:\n\n```\n{\n  search: 'Search emojis...',\n  categories: {\n    recents: 'Recent Emojis',\n    smileys: 'Smileys & People',\n    animals: 'Animals & Nature',\n    food: 'Food & Drink',\n    activities: 'Activities',\n    travel: 'Travel & Places',\n    objects: 'Objects',\n    symbols: 'Symbols',\n    flags: 'Flags'\n  },\n  notFound: 'No emojis found'\n}\n```\n\n### `showPicker(referenceElement)`\n\nShows the picker, positioning it relative to the given reference element. The reference element is usually the button or other element that was clicked to open the picker.\n\n### `hidePicker()`\n\nHides the picker.\n\n### `pickerVisible` (property)\n\nWill be `true` if the picker is currently visible, and `false` if not.\n\n### `on(event, callback)`\n\nAdds an event listener. Currently there is only one event:\n\n* `emoji`: Fired when an emoji is picked. The callback is called with a single argument, the emoji character that was picked.\n\n## Development\n\nThe easiest way to hack on Emoji Button is to use the examples page.\n\n### Clone the repository\n\n    git clone https://github.com/joeattardi/emoji-button.git\n\n### From the repository root\n\n#### Install dependencies\n\n    npm install\n\n#### Set up the link\n\n    npm link\n\n#### Start the build/watch loop\n\n    npm run build:watch\n\n### From the `examples` subdirectory\n\n#### Install dependencies\n\n    npm install\n\n#### Link the library\n\n    npm link emoji-button\n\n#### Start the dev server\n\n    npm start\n\n### Open the page\n\nhttp://localhost:5000"
+      },
+      "npm": {
+        "downloads": [
+          {
+            "from": "2019-11-17T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 8
+          },
+          {
+            "from": "2019-11-11T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 65
+          },
+          {
+            "from": "2019-10-19T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 65
+          },
+          {
+            "from": "2019-08-20T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 65
+          },
+          {
+            "from": "2019-05-22T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 65
+          },
+          {
+            "from": "2018-11-18T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 65
+          }
+        ],
+        "dependentsCount": 0,
+        "starsCount": 0
+      },
+      "github": {
+        "homepage": "https://joeattardi.github.io/emoji-button/",
+        "starsCount": 340,
+        "forksCount": 13,
+        "subscribersCount": 5,
+        "issues": {
+          "count": 11,
+          "openCount": 0,
+          "distribution": {
+            "3600": 0,
+            "10800": 0,
+            "32400": 1,
+            "97200": 3,
+            "291600": 1,
+            "874800": 6,
+            "2624400": 0,
+            "7873200": 0,
+            "23619600": 0,
+            "70858800": 0,
+            "212576400": 0
+          },
+          "isDisabled": false
+        },
+        "contributors": [
+          { "username": "joeattardi", "commitsCount": 6 },
+          { "username": "ianknauer", "commitsCount": 4 },
+          { "username": "edm00se", "commitsCount": 1 }
+        ],
+        "commits": [
+          {
+            "from": "2019-11-11T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 8
+          },
+          {
+            "from": "2019-10-19T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 28
+          },
+          {
+            "from": "2019-08-20T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 111
+          },
+          {
+            "from": "2019-05-22T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 111
+          },
+          {
+            "from": "2018-11-18T00:00:00.000Z",
+            "to": "2019-11-18T00:00:00.000Z",
+            "count": 111
+          }
+        ]
+      },
+      "source": {
+        "files": { "readmeSize": 3670, "testsSize": 8131 },
+        "linters": ["eslint", "prettier"]
+      }
+    },
+    "evaluation": {
+      "quality": {
+        "carefulness": 0.9199999999999999,
+        "tests": 0.6,
+        "health": 1,
+        "branding": 0
+      },
+      "popularity": {
+        "communityInterest": 361,
+        "downloadsCount": 21.666666666666668,
+        "downloadsAcceleration": 0.5429033485540334,
+        "dependentsCount": 0
+      },
+      "maintenance": {
+        "releasesFrequency": 1,
+        "commitsFrequency": 1,
+        "openIssues": 1,
+        "issuesDistribution": 1
+      }
+    },
+    "score": {
+      "final": 0.633829796223646,
+      "detail": {
+        "quality": 0.8336448832139087,
+        "popularity": 0.09638951788420967,
+        "maintenance": 1
+      }
+    }
+  },
+  "promise-poller": {
+    "analyzedAt": "2019-11-13T11:34:46.920Z",
+    "collected": {
+      "metadata": {
+        "name": "promise-poller",
+        "scope": "unscoped",
+        "version": "1.9.1",
+        "description": "A basic poller built on top of promises",
+        "keywords": [
+          "promise",
+          "promises",
+          "poller",
+          "polling",
+          "poll",
+          "timeout",
+          "ajax"
+        ],
+        "date": "2019-09-21T02:08:13.935Z",
+        "author": {
+          "name": "Joe Attardi",
+          "email": "jattardi@gmail.com",
+          "url": "https://joeattardi.codes/"
+        },
+        "publisher": { "username": "joeattardi", "email": "joe@attardi.net" },
+        "maintainers": [
+          { "username": "joeattardi", "email": "joe@attardi.net" }
+        ],
+        "repository": {
+          "type": "git",
+          "url": "git://github.com/joeattardi/promise-poller.git"
+        },
+        "links": {
+          "npm": "https://www.npmjs.com/package/promise-poller",
+          "homepage": "https://github.com/joeattardi/promise-poller",
+          "repository": "https://github.com/joeattardi/promise-poller",
+          "bugs": "https://github.com/joeattardi/promise-poller/issues"
+        },
+        "license": "MIT",
+        "dependencies": { "debug": "^4.1.0" },
+        "devDependencies": {
+          "@babel/cli": "^7.1.5",
+          "@babel/core": "^7.1.6",
+          "@babel/preset-env": "^7.1.6",
+          "@babel/register": "^7.0.0",
+          "eslint": "^5.9.0",
+          "eslint-plugin-prettier": "^3.0.0",
+          "husky": "^1.1.4",
+          "jasmine": "^3.3.0",
+          "lint-staged": "^8.0.5",
+          "prettier": "^1.15.2"
+        },
+        "releases": [
+          {
+            "from": "2019-10-14T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "from": "2019-08-15T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 4
+          },
+          {
+            "from": "2019-05-17T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 4
+          },
+          {
+            "from": "2018-11-13T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 5
+          },
+          {
+            "from": "2017-11-13T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 5
+          }
+        ],
+        "hasTestScript": true,
+        "readme": "# promise-poller\n[![](https://travis-ci.org/joeattardi/promise-poller.svg?branch=master)](https://travis-ci.org/joeattardi/promise-poller)\n[![](https://badge.fury.io/js/promise-poller.svg)](https://www.npmjs.com/package/promise-poller)\n[![](https://david-dm.org/joeattardi/promise-poller.svg)](https://david-dm.org/joeattardi/promise-poller)\n\nA basic poller built on top of promises.\n\nSometimes, you may perform asynchronous operations that may fail. In many of those cases, you want to retry these operations one or more times before giving up. `promise-poller` handles this elegantly using promises.\n\n# Usage\n## Basic usage\nThe core of `promise-poller` is a *task function*. This is simply a function that starts your asynchronous task and returns a promise. If the task function does not return a promise, it will be wrapped in a promise. To start polling, pass your task function to the `promisePoller` function:\n\n    import promisePoller from 'promise-poller';\n\n    function myTask() {\n      // do some async stuff that returns a promise\n      return promise;\n    }\n\n    var poller = promisePoller({\n      taskFn: myTask\n    });\n\nThe `promisePoller` function will return a \"master promise\". This promise will be resolved when your task succeeds, or rejected if your task fails and no retries remain.\n\nThe master promise will be resolved with the value that your task promise is resolved with. If the poll fails, the master promise will be rejected with an array of all the rejection reasons for each poll attempt.\n\n`promise-poller` will attempt your task by calling the function and waiting on the returned promise. If the promise is rejected, `promise-poller` will wait one second and try again. It will attempt to execute your task 3 times before rejecting the master promise.\n\n### Use in non-ES2015 environments\n`promise-poller` is written using ES2015 and transpiled with Babel. The main `promisePoller` function is the default export. If you are using `promise-poller` in an ES5 environment, you will have to specify the `default` property when requiring the library in:\n\n    var promisePoller = require('promise-poller').default;\n\n## Specify polling options\nYou can specify a different polling interval or number of retries:\n\n    var poller = promisePoller({\n      taskFn: myTask,\n      interval: 500, // milliseconds\n      retries: 5\n    });\n\n## Specify timeout\nIf you want each poll attempt to reject after a certain timeout has passed, use the `timeout` option:\n\n    var poller = promisePoller({\n      taskFn: myTask,\n      interval: 500,\n      timeout: 2000\n    });\n\nIn the above example, the poll is considered failed if it isn't resolved after 2 seconds. If there are retries remaining, it will retry the poll as usual.\n\n## Specify \"master timeout\"\nInstead of timing out each poll attempt, you can set a timeout for the entire master polling operation:\n\n    var poller = promisePoller({\n      taskFn: myTask,\n      interval: 500,\n      retries: 10,\n      masterTimeout: 2000\n    });\n\nIn the above example, the entire poll operation will fail if there is not a successful poll within 2 seconds. This will reject the master promise.\n\n## Cancel polling\nYou may want to cancel the polling early. For example, if the poll fails because of an invalid password, that's not likely to change, so it would be a waste of time to continue to poll. To cancel polling early, return `false` from the task function instead of a promise.\n\nAlternatively, if your task function involves async work with promises, you can reject the promise with the `CANCEL_TOKEN` object.\n\n### Cancellation example\n\n```javascript\nimport promisePoller, { CANCEL_TOKEN } from 'promise-poller';\n\nconst taskFn = () => {\n  return new Promise((resolve, reject) => {\n    doAsyncStuff().then(resolve, error => {\n      if (error === 'invalid password') {\n        reject(CANCEL_TOKEN); // will cancel polling\n      } else {\n        reject(error); // will continue polling\n      }\n    });\n  });\n}\n```\n\n## The `shouldContinue` function\nYou can specify an optional `shouldContinue` function that takes two arguments. The first argument is a rejection reason when a poll fails, and the second argument is the resolved value when a poll succeeds. \nIf the poll attempt failed, and you want to abort further polling, return `false` from this function. On the other hand, if your poll resolved to a value but you want to keep polling, return `true` from this function.\n\n## Select polling strategy\nBy default, `promise-poller` will use a fixed interval between each poll attempt. For example, with an `interval` option of 500, the poller will poll approximately every 500 milliseconds. This is the `fixed-interval` strategy. There are two other strategies available that may better suit your use case. To select a polling strategy, specify the `strategy` option, e.g.:\n\n    promisePoller({\n      taskFn: myTask,\n      strategy: 'linear-backoff'\n    });\n\n### Linear backoff (`linear-backoff`)\nOptions:\n\n* `start` - The starting value to use for the polling interval (default = 1000)\n* `increment` - The amount to increase the interval by on each poll attempt.\n\nLinear backoff will increase the interval linearly by some constant amount for each poll attempt. For example, using the default options, the first retry will wait 1000 milliseconds. Each successive retry will wait an additional 1000 milliseconds: 1000, 2000, 3000, 4000, etc.\n\n### Exponential backoff with jitter (`exponential-backoff`)\nOptions:\n\n* `min` - The minimum interval amount to use (default = 1000)\n* `max` - The maximum interval amount to use (default = 30000)\n\nExponential backoff increases the poll interval by a power of two for each poll attempt. `promise-poller` uses exponential backoff with jitter. Jitter takes a random value between `min` and 2^*n* on the *n*th polling interval, not to exceed `max`. \n\nFor more information about exponential backoff with jitter, and its advantages, see [https://www.awsarchitectureblog.com/2015/03/backoff.html](https://www.awsarchitectureblog.com/2015/03/backoff.html).\n\n## Progress notification\nYou can also specify a progress callback function. Each time the task fails, the progress callback will be called with the number of retries remaining and the error that occurred (the value that the task promise was rejected with):\n\n    function progress(retriesRemaining, error) {\n      // log the error?\n    }\n\n    var poller = promisePoller({\n      taskFn: myTask,\n      interval: 500,\n      retries: 5,\n      progressCallback: progress\n    });\n\n## Debugging\n`promise-poller` uses the [debug](https://www.npmjs.com/package/debug) library. The debug name is `promisePoller`. To run your program with debug output for the `promise-poller`, set the `DEBUG` environment variable accordingly:\n\n`% DEBUG=promisePoller node path/to/app.js`\n\nIf you have more than one poller active at a time, and you need to differentiate between them in debug output, you can give the `promisePoller` options a `name` property:\n\n    var poller = promisePoller({\n      taskFn: myTask,\n      interval: 500,\n      retries: 5,\n      name: 'App Server Poller'\n    });\n\nWhen this poller prints debug messages, the poller name will be included:\n\n    promisePoller (App Server Poller) Poll failed. 1 retries remaining. +504ms\n\n# Contributors\n* Joe Attardi\n* /u/jcready\n* Jason Stitt\n* Emily Marigold Klassen\n\n# License\nThe MIT License (MIT)\n\nCopyright (c) 2016-2019 Joe Attardi <jattardi@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+      },
+      "npm": {
+        "downloads": [
+          {
+            "from": "2019-11-12T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 965
+          },
+          {
+            "from": "2019-11-06T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 6835
+          },
+          {
+            "from": "2019-10-14T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 26881
+          },
+          {
+            "from": "2019-08-15T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 71845
+          },
+          {
+            "from": "2019-05-17T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 110683
+          },
+          {
+            "from": "2018-11-13T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 151257
+          }
+        ],
+        "dependentsCount": 9,
+        "starsCount": 7
+      },
+      "github": {
+        "starsCount": 69,
+        "forksCount": 5,
+        "subscribersCount": 1,
+        "issues": {
+          "count": 17,
+          "openCount": 3,
+          "distribution": {
+            "3600": 3,
+            "10800": 0,
+            "32400": 2,
+            "97200": 1,
+            "291600": 0,
+            "874800": 3,
+            "2624400": 1,
+            "7873200": 4,
+            "23619600": 1,
+            "70858800": 1,
+            "212576400": 1
+          },
+          "isDisabled": false
+        },
+        "contributors": [
+          { "username": "forivall", "commitsCount": 1 },
+          { "username": "jasonstitt", "commitsCount": 1 },
+          { "username": "joeattardi", "commitsCount": 1 }
+        ],
+        "commits": [
+          {
+            "from": "2019-11-06T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "from": "2019-10-14T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "from": "2019-08-15T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 13
+          },
+          {
+            "from": "2019-05-17T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 13
+          },
+          {
+            "from": "2018-11-13T00:00:00.000Z",
+            "to": "2019-11-13T00:00:00.000Z",
+            "count": 13
+          }
+        ],
+        "statuses": [
+          {
+            "context": "continuous-integration/travis-ci/push",
+            "state": "success"
+          }
+        ]
+      },
+      "source": {
+        "files": {
+          "readmeSize": 8469,
+          "testsSize": 8453,
+          "hasNpmIgnore": true,
+          "hasChangelog": true
+        },
+        "badges": [
+          {
+            "urls": {
+              "original": "https://travis-ci.org/joeattardi/promise-poller.svg?branch=master",
+              "service": "https://api.travis-ci.org/joeattardi/promise-poller.svg?branch=master",
+              "shields": "https://img.shields.io/travis/joeattardi/promise-poller/master.svg",
+              "content": "https://img.shields.io/travis/joeattardi/promise-poller/master.json"
+            },
+            "info": {
+              "service": "travis",
+              "type": "build",
+              "modifiers": { "branch": "master" }
+            }
+          },
+          {
+            "urls": {
+              "original": "https://david-dm.org/joeattardi/promise-poller.svg",
+              "service": "https://david-dm.org/joeattardi/promise-poller.svg",
+              "shields": "https://img.shields.io/david/joeattardi/promise-poller.svg",
+              "content": "https://img.shields.io/david/joeattardi/promise-poller.json"
+            },
+            "info": {
+              "service": "david",
+              "type": "dependencies",
+              "modifiers": { "statusType": "normal" }
+            }
+          }
+        ],
+        "linters": ["eslint", "prettier"]
+      }
+    },
+    "evaluation": {
+      "quality": {
+        "carefulness": 0.9999999999999999,
+        "tests": 0.85,
+        "health": 1,
+        "branding": 0.3
+      },
+      "popularity": {
+        "communityInterest": 85,
+        "downloadsCount": 23948.333333333332,
+        "downloadsAcceleration": 170.53335235920852,
+        "dependentsCount": 9
+      },
+      "maintenance": {
+        "releasesFrequency": 0.9,
+        "commitsFrequency": 0.9,
+        "openIssues": 1,
+        "issuesDistribution": 0.9
+      }
+    },
+    "score": {
+      "final": 0.6992406158025205,
+      "detail": {
+        "quality": 0.9747202937981778,
+        "popularity": 0.16247423750140436,
+        "maintenance": 0.9998815558216447
+      }
+    }
+  }
+}
