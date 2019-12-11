@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { faBox, faCloudDownloadAlt, faStar, faTag } from '@fortawesome/free-solid-svg-icons';
+import { faCube, faCloudDownloadAlt, faStar, faTag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Gravatar from 'react-gravatar';
@@ -18,7 +18,7 @@ export default function Package({ data, downloads }) {
   return (
     <div className={styles.package}>
       <div className={styles.name}>
-        <FontAwesomeIcon icon={faBox} size="lg" /> 
+        <FontAwesomeIcon icon={faCube} size="lg" /> 
         <h2><a target="_blank" rel="noopener noreferrer" href={metadata.links.npm}>{metadata.name}</a></h2>
       </div>
       <div className={styles.details}>
