@@ -10,7 +10,7 @@ import { getDownloadStatistics, getPackageData } from './apiClient';
 
 import styles from './App.module.scss';
 
-const packages = ['@joeattardi/emoji-button', 'promise-poller', 'json-colorizer', 'react'];
+const packages = ['@joeattardi/emoji-button', 'promise-poller', 'json-colorizer', 'svelte-tabs', 'svelte-click-outside', 'react'];
 
 function App() {
   const [isLoading, setLoading] = useState(true);
