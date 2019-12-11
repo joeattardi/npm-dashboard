@@ -48,21 +48,25 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
-    .avatar {
-      img {
-        border-radius: 50%;
-      }
-    }
-
     .version {
       display: flex;
       font-weight: bold;
+      align-items: center;
+      height: 25px;
 
       .date {
         margin-left: 0.25rem;
         color: #666666;
         font-weight: normal;
         flex-grow: 1;
+      }
+
+      .avatar {
+        display: flex;
+
+        img {
+          border-radius: 50%;
+        }
       }
     }
 
@@ -85,9 +89,19 @@
     }
 
     .section-title {
-      text-align: center;
+      text-align: left;
+      border-bottom: 1px solid #4C5B5C;
+      padding-bottom: 0.25rem;
       margin-top: 0.5rem;
       color: #4C5B5C;
+      font-size: 0.8rem;
+
+      display: flex;
+      align-items: center;
+      
+      span {
+        margin-left: 0.25rem;
+      }
     }
 
     .downloads {
