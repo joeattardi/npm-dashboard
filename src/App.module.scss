@@ -1,6 +1,9 @@
+@import './variables';
+
 #main {
   padding: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: $header-height + 0.5rem;
 }
