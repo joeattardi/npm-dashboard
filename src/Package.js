@@ -3,6 +3,7 @@ import React from 'react';
 import { faBox, faCloudDownloadAlt, faStar, faTag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import Gravatar from 'react-gravatar';
 
 import DownloadCount from './DownloadCount';
 import OverallScore from './OverallScore';
@@ -22,10 +23,9 @@ export default function Package({ data, downloads }) {
       </div>
       <div className={styles.details}>
         <div className={styles.version}>
-          <div>
-            <FontAwesomeIcon icon={faTag} size="sm" /> v{metadata.version}
-          </div>
+          <div><FontAwesomeIcon icon={faTag} size="sm" /> {metadata.version}</div>
           <div className={styles.date}>{formatDistanceToNow(new Date(metadata.date), { addSuffix: true })}</div>
+          {metadata.author ? <div className={styles.avatar} data-tip={metadata.author.name}><Gravatar email={metadata.author.email} size={25} /></div> : null}
         </div>
         <div className={styles['section-title']}><FontAwesomeIcon icon={faStar} /> Score</div>
         <div className={styles.scores}>
