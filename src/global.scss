@@ -4,7 +4,45 @@
 @import '~react-circular-progressbar/dist/styles.css';
 @import '~react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
+@import './variables';
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+}
+
+.CircularProgressbar {
+  & ~ div {
+    font-size: 1.4rem;
+  }
+
+  &.red {
+    .CircularProgressbar-path {
+      stroke: $status-red;
+    }
+
+    & ~ div {
+      color: $status-red;
+    }
+  }
+
+  &.yellow {
+    .CircularProgressbar-path {
+      stroke: $status-yellow;
+    }
+
+    & ~ div {
+      color: $status-yellow;
+    }
+  }
+
+  &.green {
+    .CircularProgressbar-path {
+      stroke: $status-green;
+    }
+
+    & ~ div {
+      color: $status-green;
+    }
+  }
 }

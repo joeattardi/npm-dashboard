@@ -1,25 +1,33 @@
 import React from "react";
 
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 
-import styles from './Score.module.scss';
+import styles from "./Score.module.scss";
 
-import { getPercentage } from './util';
+import { getPercentage } from "./util";
 
 export default function Score({ label, score, name }) {
+  const percentage = getPercentage(score);
+
+  let className;
+  if (percentage < 40) {
+    className = "red";
+  } else if (percentage < 70) {
+    className = "yellow";
+  } else {
+    className = "green";
+  }
+
   return (
-    <div className={styles.score} data-tip={`${name}: ${getPercentage(score)}%`}>
-      <CircularProgressbar
+    <div className={styles.score} data-tip={`${name}: ${percentage}%`}>
+      <CircularProgressbarWithChildren
+        className={className}
         value={score}
         maxValue={1}
         strokeWidth={15}
-        text={label}
-        styles={buildStyles({
-          textSize: "3rem",
-          pathColor: '#5D737E',
-          textColor: '#5D737E'
-        })}
-      />
+      >
+        {label}
+      </CircularProgressbarWithChildren>
     </div>
   );
 }

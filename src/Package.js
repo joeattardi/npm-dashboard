@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import DownloadCount from './DownloadCount';
+import OverallScore from './OverallScore';
 import Score from './Score';
-import { getPercentage } from './util';
 
 import styles from './Package.module.scss';
 
@@ -32,9 +32,7 @@ export default function Package({ data, downloads }) {
           <Score score={score.detail.quality} name="Quality" label="Q" />
           <Score score={score.detail.popularity} name="Popularity" label="P" />
           <Score score={score.detail.maintenance} name="Maintenance" label="M" data-tip="shit" />
-          <div className={styles['overall-score']} data-tip={`Overall score: ${getPercentage(score.final)}%`}>
-            {getPercentage(score.final)}
-          </div>
+          <OverallScore score={score.final} />
         </div>
         <div className={styles['section-title']}><FontAwesomeIcon icon={faCloudDownloadAlt} /> Downloads</div>
         <div className={styles.downloads}>
