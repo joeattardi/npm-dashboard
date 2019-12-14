@@ -11,6 +11,44 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.ReactModalPortal {
+  position: relative;
+  z-index: 99999;
+}
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
+.ReactModal__Content {
+  opacity: 0;
+  transform: scale3d(1.2, 1.2, 1);
+  transition: all 250ms;
+}
+
+.ReactModal__Content--after-open {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+.ReactModal__Content--before-close {
+  opacity: 0;
+  transform: scale3d(1.2, 1.2, 1);
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
 .CircularProgressbar {
   & ~ div {
     font-size: 1.4rem;

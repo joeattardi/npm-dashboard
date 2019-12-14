@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import ReactTooltip from 'react-tooltip'
+import ReactModal from 'react-modal';
+import ReactTooltip from 'react-tooltip';
 
+import AddTile from './AddTile';
+import ConfirmationModal from './ConfirmationModal';
 import Header from './Header';
 import LoadingMessage from './LoadingMessage';
 import Package from './Package';
@@ -10,12 +13,24 @@ import { getDownloadStatistics, getPackageData } from './apiClient';
 
 import styles from './App.module.scss';
 
-const packages = ['@joeattardi/emoji-button', 'promise-poller', 'json-colorizer', 'svelte-tabs', 'svelte-click-outside', 'react'];
+const packages = [
+  '@joeattardi/emoji-button',
+  'promise-poller',
+  'json-colorizer',
+  'svelte-tabs',
+  'svelte-click-outside',
+  'react'
+];
+
+ReactModal.setAppElement('#root');
 
 function App() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [downloads, setDownloads] = useState({});
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [packageToDelete, setPackageToDelete] = useState(null);
 
   useEffect(() => {
     loadData();
@@ -32,14 +47,46 @@ function App() {
     }
   }, []);
 
+  function showRemoveConfirmation(pkg) {
+    setPackageToDelete(pkg);
+    setShowConfirmModal(true);
+  }
+
+  function removePackage(pkg) {
+    setData(Object.keys(data).filter(key => key !== pkg).reduce((newData, key) => {
+      newData[key] = data[key];
+      return newData;
+    }, {}));
+  }
+
   return (
-    <div id={styles.app}>
-      <ReactTooltip effect="solid" />
-      <Header />
-      <div id={styles.main}>
-        {isLoading ? <LoadingMessage /> : Object.keys(data).map(pkg => <Package data={data[pkg]} downloads={downloads[pkg]} key={pkg} />)}
+    <>
+      <div id={styles.app}>
+        <ReactTooltip effect="solid" />
+        <Header />
+        <div id={styles.main}>
+          {isLoading ? (
+            <LoadingMessage />
+          ) : (
+            Object.keys(data).map(pkg => (
+              <Package
+                data={data[pkg]}
+                downloads={downloads[pkg]}
+                key={pkg}
+                onRemoveClick={() => showRemoveConfirmation(pkg)}
+              />
+            ))
+          )}
+          {!isLoading ? <AddTile /> : null}
+        </div>
       </div>
-    </div>
+      <ConfirmationModal
+        isOpen={showConfirmModal}
+        onClose={() => setShowConfirmModal(false)}
+        pkg={packageToDelete}
+        onConfirm={removePackage}
+      />
+    </>
   );
 }
 

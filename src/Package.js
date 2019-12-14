@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { faCube, faCloudDownloadAlt, faStar, faTag } from '@fortawesome/free-solid-svg-icons';
+import { faCube, faCloudDownloadAlt, faStar, faTag, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Gravatar from 'react-gravatar';
@@ -11,7 +11,7 @@ import Score from './Score';
 
 import styles from './Package.module.scss';
 
-export default function Package({ data, downloads }) {
+export default function Package({ data, downloads, onRemoveClick }) {
   const metadata = data.collected.metadata;
   const score = data.score;
 
@@ -20,6 +20,7 @@ export default function Package({ data, downloads }) {
       <div className={styles.name}>
         <FontAwesomeIcon icon={faCube} size="lg" /> 
         <h2><a target="_blank" rel="noopener noreferrer" href={metadata.links.npm}>{metadata.name}</a></h2>
+        <button className={styles['close-button']} onClick={onRemoveClick}><FontAwesomeIcon icon={faTimes} /></button>
       </div>
       <div className={styles.details}>
         <div className={styles.version}>
