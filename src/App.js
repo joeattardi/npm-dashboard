@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import ReactModal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
 
+import AddModal from './AddModal';
 import AddTile from './AddTile';
 import ConfirmDeleteModal from './package/ConfirmDeleteModal';
 import Header from './Header';
@@ -13,41 +14,49 @@ import { getDownloadStatistics, getPackageData } from './apiClient';
 
 import styles from './App.module.scss';
 
-const packages = [
-  '@joeattardi/emoji-button',
-  'promise-poller',
-  'json-colorizer',
-  'svelte-tabs',
-  'svelte-click-outside',
-  'react'
-];
+const LOCAL_STORAGE_KEY = 'packages';
 
 ReactModal.setAppElement('#root');
 
 function App() {
-  const [isLoading, setLoading] = useState(true);
+  const [packages, setPackages] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState({});
   const [downloads, setDownloads] = useState({});
+
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [packageToDelete, setPackageToDelete] = useState(null);
 
-  async function loadData() {
-    setLoading(true);
+  const loadData = useCallback(async () => {
+    if (packages && packages.length) {
+      setLoading(true);
 
-    const packageData = await getPackageData(packages);
-    setData(packageData);
+      const packageData = await getPackageData(packages);
+      setData(packageData);
 
-    const downloadsData = await getDownloadStatistics(packages);
-    setDownloads(downloadsData);
+      const downloadsData = await getDownloadStatistics(packages);
+      setDownloads(downloadsData);
 
-    setLoading(false);
-    ReactTooltip.rebuild();
-  }
+      setLoading(false);
+      ReactTooltip.rebuild();
+    }
+  }, [packages]);
 
   useEffect(() => {
     loadData();
+  }, [loadData]);
+
+  useEffect(() => {
+    setPackages(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []);
   }, []);
+  
+  useEffect(() => {
+    if (packages) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(packages));
+    }
+  }, [packages]);
 
   function showRemoveConfirmation(pkg) {
     setPackageToDelete(pkg);
@@ -55,21 +64,34 @@ function App() {
   }
 
   function removePackage(pkg) {
-    setData(Object.keys(data).filter(key => key !== pkg).reduce((newData, key) => {
-      newData[key] = data[key];
-      return newData;
-    }, {}));
+    setData(
+      Object.keys(data)
+        .filter(key => key !== pkg)
+        .reduce((newData, key) => {
+          newData[key] = data[key];
+          return newData;
+        }, {})
+    );
+
+    setPackages(packages.filter(p => p !== pkg));
+  }
+
+  function addPackage(pkg) {
+    setPackages([
+      ...packages,
+      pkg
+    ]);
   }
 
   function refresh() {
-    loadData();
+    // loadData();
   }
 
   return (
     <>
       <div id={styles.app}>
         <ReactTooltip effect="solid" />
-        <Header onRefresh={refresh} />
+        <Header onRefresh={refresh} onAdd={() => setShowAddModal(true)} />
         <div id={styles.main}>
           {isLoading ? (
             <LoadingMessage />
@@ -83,7 +105,9 @@ function App() {
               />
             ))
           )}
-          {!isLoading ? <AddTile /> : null}
+          {!isLoading ? (
+            <AddTile onClick={() => setShowAddModal(true)} />
+          ) : null}
         </div>
       </div>
       <ConfirmDeleteModal
@@ -91,6 +115,11 @@ function App() {
         onClose={() => setShowConfirmModal(false)}
         pkg={packageToDelete}
         onConfirm={removePackage}
+      />
+      <AddModal
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onAdd={addPackage}
       />
     </>
   );

@@ -48,6 +48,10 @@
       font-size: 1rem;
       border-radius: 5px;
       transition: background 200ms;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
     }
   }
 
@@ -122,11 +126,5 @@
       display: flex;
       justify-content: center;
     }
-  }
-}
-
-.package:hover {
-  .close-button {
-    background: rgba(255, 255, 255, 0.2);
   }
 }

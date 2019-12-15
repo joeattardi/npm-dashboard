@@ -1,45 +1,9 @@
 @import '../styles/variables';
 
-.modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
+button.remove {
+  background: $status-red;
 
-.modal-body {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-
-  button {
-    margin: 0.5rem;
-    font-size: 0.9rem;
-    padding: 0.5rem 2rem;
-    border-radius: 5px;
-    border: none;
-    background: $button-background;
-    color: $button-color;
-    cursor: pointer;
-    transition: background 250ms;
-
-    &:hover {
-      background: lighten($button-background, 10%);
-    }
-
-    &.remove {
-      background: $status-red;
-
-      &:hover {
-        background: lighten($status-red, 10%);
-      }
-    }
+  &:hover {
+    background: lighten($status-red, 10%);
   }
 }

@@ -7,12 +7,12 @@ import Toolbar from './Toolbar';
 
 import styles from './Header.module.scss';
 
-export default function Header({ onRefresh }) {
+export default function Header({ onRefresh, onAdd }) {
   return (
     <header id={styles.header}>
       <FontAwesomeIcon icon={faChartBar} size="2x" />
       <h1>npm dashboard</h1>
-      <Toolbar onRefresh={onRefresh} />
+      <Toolbar onRefresh={onRefresh} onAdd={onAdd} />
     </header>
   )
 }

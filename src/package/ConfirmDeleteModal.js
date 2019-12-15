@@ -1,42 +1,58 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactModal from 'react-modal';
+
+import Modal from '../Modal';
 
 import styles from './ConfirmDeleteModal.module.scss';
 
-export default function ConfirmDeleteModal({ isOpen, pkg, onClose, onConfirm }) {
-  function confirm() {
+export default function ConfirmDeleteModal({
+  isOpen,
+  pkg,
+  onClose,
+  onConfirm
+}) {
+  const confirm = useCallback(() => {
     onClose();
     onConfirm(pkg);
-  }
+  }, [onClose, onConfirm, pkg]);
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === 'Enter' && isOpen) {
+        confirm();
+      }
+    }
+
+    document.body.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [confirm, isOpen])
 
   return (
-    <ReactModal
-      closeTimeoutMS={250}
-      shouldCloseOnOverlayClick={false}
-      onRequestClose={onClose}
+    <Modal
       isOpen={isOpen}
-      style={{
-        content: {
-          width: '20rem',
-          height: '15rem',
-          margin: 'auto'
-        }
-      }}
-    >
-      <div className={styles.modal}>
-        <div className={styles['modal-body']}>
-          <FontAwesomeIcon icon={faExclamationTriangle} size="4x" />
-          <h2>Are you sure?</h2>
-          <p>Do you really want to remove the package <strong>{pkg}</strong> from the dashboard?</p>
-        </div>
-        <div className={styles['modal-buttons']}>
+      onClose={onClose}
+      width="20rem"
+      height="15rem"
+      buttons={
+        <>
           <button onClick={onClose}>Cancel</button>
-          <button className={styles.remove} onClick={confirm}>Remove</button>
-        </div>
-      </div>
-    </ReactModal>
+          <button className={styles.remove} onClick={confirm}>
+            Remove
+          </button>
+        </>
+      }
+    >
+      <FontAwesomeIcon icon={faExclamationTriangle} size="4x" />
+      <h2>Are you sure?</h2>
+      <p>
+        Do you really want to remove the package <strong>{pkg}</strong> from the
+        dashboard?
+      </p>
+    </Modal>
   );
 }
