@@ -87,7 +87,7 @@ body {
 
 .tile {
   margin: 0.75rem;
-  width: 20rem;
+  width: $tile-width;
   height: 16rem;
   display: flex;
   flex-direction: column;
