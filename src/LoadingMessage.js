@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
 
 import styles from './LoadingMessage.module.scss';
 

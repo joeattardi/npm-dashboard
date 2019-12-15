@@ -1,23 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
-import { faCube } from '@fortawesome/free-solid-svg-icons';
+import { faCube, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Loader from 'react-loader-spinner';
+
+import { packageExists } from './apiClient';
 
 import Modal from './Modal';
 
 import styles from './AddModal.module.scss';
 
-export default function AddModal({ isOpen, onClose, onAdd }) {
+export default function AddModal({ isOpen, onClose, onAdd, packages }) {
+  const [isLoading, setLoading] = useState(false);
   const [pkg, setPkg] = useState('');
+  const [error, setError] = useState(null);
+  const [icon, setIcon] = useState(faCube);
+  const [iconClasses, setIconClasses] = useState(styles.icon);
+
+  const inputField = useRef();
 
   function close() {
     onClose();
-    setPkg('');
+    setTimeout(() => {
+      setPkg('');
+      setError(null);
+      setLoading(false);
+      setIcon(faCube);
+      setIconClasses(styles.icon);
+    }, 250);
   }
 
-  function add() {
-    onAdd(pkg);
-    close();
+  async function validate() {
+    if (packages.indexOf(pkg) >= 0) {
+      return `Package "${pkg}" already exists in the dashboard`;
+    }
+
+    const result = await packageExists(pkg);
+    if (!result) {
+      return `Package "${pkg}" not found`;
+    }
+  }
+
+  async function add() {
+    setLoading(true);
+    const errorMessage = await validate();
+    if (errorMessage) {
+      setLoading(false);
+      setError(errorMessage);
+      setPkg('');
+      inputField.current.focus();
+    } else {
+      setIconClasses(`${styles.icon} ${styles.hide}`);
+      setTimeout(() => {
+        setIcon(faCheck);
+        setIconClasses(`${styles.icon} ${styles.success}`);
+        setTimeout(() => {
+          onAdd(pkg);
+          close();
+        }, 500);
+      }, 500);
+    }
   }
 
   function onChangePackage(event) {
@@ -34,19 +76,31 @@ export default function AddModal({ isOpen, onClose, onAdd }) {
     <Modal
       isOpen={isOpen}
       onClose={close}
-      width="20rem"
-      height="15rem"
+      width="25rem"
+      height="20rem"
       buttons={
         <>
           <button onClick={onClose}>Cancel</button>
-          <button disabled={!pkg} onClick={add}>Add</button>
+          <button
+            disabled={!pkg || isLoading}
+            onClick={add}
+            style={{ width: '6rem' }}
+          >
+            {isLoading ? (
+              <Loader height={13} width={13} color="#FFFFFF" type="Oval" />
+            ) : (
+              <span>Add</span>
+            )}
+          </button>
         </>
       }
     >
-      <FontAwesomeIcon icon={faCube} size="4x" />
+      <div className={iconClasses}><FontAwesomeIcon icon={icon} size="4x" /></div>
       <h2>Add package</h2>
+      <p className={styles.error}>{error ? error : <span>&nbsp;</span>}</p>
       <input
         autoFocus
+        ref={inputField}
         id={styles['package-input']}
         type="text"
         value={pkg}

@@ -120,6 +120,7 @@ function App() {
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
         onAdd={addPackage}
+        packages={packages}
       />
     </>
   );

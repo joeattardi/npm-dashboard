@@ -28,3 +28,8 @@ export async function getDownloadStatistics(packages) {
 
   return downloads;
 }
+
+export async function packageExists(pkg) {
+  const response = await fetch(`https://api.npmjs.org/downloads/point/last-day/${pkg}`);
+  return response.status !== 404;
+}

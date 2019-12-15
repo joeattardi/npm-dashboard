@@ -1,5 +1,27 @@
+@import './styles/variables';
+
 #package-input {
   font-size: 0.9rem;
   width: 80%;
   padding: 0.25rem;
+}
+
+.error {
+  color: $status-red;
+  font-size: 0.8rem;
+  margin-top: 0;
+  text-align: center;
+}
+
+.icon {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.icon.success {
+  color: green;
+}
+
+.icon.hide {
+  opacity: 0;
 }
