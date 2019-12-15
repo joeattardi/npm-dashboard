@@ -30,6 +30,6 @@ export async function getDownloadStatistics(packages) {
 }
 
 export async function packageExists(pkg) {
-  const response = await fetch(`https://api.npmjs.org/downloads/point/last-day/${pkg}`);
-  return response.status !== 404;
+  const result = await getPackageData([pkg]);
+  return pkg in result;
 }
