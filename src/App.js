@@ -24,6 +24,7 @@ function App() {
   const [data, setData] = useState({});
   const [downloads, setDownloads] = useState({});
   const [skipLoad, setSkipLoad] = useState(false);
+  const [addedPackage, setAddedPackage] = useState(null);
 
   const [showAddModal, setShowAddModal] = useState(false);
 
@@ -82,6 +83,11 @@ function App() {
 
   function addPackage(pkg) {
     setPackages([...packages, pkg]);
+    setAddedPackage(pkg);
+
+    setTimeout(() => {
+      setAddedPackage(null);
+    }, 2500);
   }
 
   function refresh() {
@@ -103,6 +109,7 @@ function App() {
                 downloads={downloads[pkg]}
                 key={pkg}
                 onRemoveClick={() => showRemoveConfirmation(pkg)}
+                isAdded={addedPackage === pkg}
               />
             )
           )}

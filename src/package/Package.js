@@ -11,12 +11,12 @@ import Score from './Score';
 
 import styles from './Package.module.scss';
 
-export default function Package({ data, downloads, onRemoveClick }) {
+export default function Package({ data, downloads, onRemoveClick, isAdded }) {
   const metadata = data.collected.metadata;
   const score = data.score;
 
   return (
-    <div className={`tile ${styles.package}`}>
+    <div className={`tile ${styles.package} ${isAdded ? styles.added : ''}`}>
       <div className={styles.name}>
         <FontAwesomeIcon icon={faCube} size="lg" /> 
         <h2><a target="_blank" rel="noopener noreferrer" href={metadata.links.npm}>{metadata.name}</a></h2>

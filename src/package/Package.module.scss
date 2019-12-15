@@ -1,6 +1,20 @@
+@keyframes yellow-fade {
+  0% {
+    background: #FDF578;
+  }
+
+  100% {
+    background: #FFFFFF;
+  }
+}
+
 .package {
   &:hover {
     background: #FAFAFA;
+  }
+
+  &.added {
+    animation: yellow-fade 2s;
   }
 
   .name {
