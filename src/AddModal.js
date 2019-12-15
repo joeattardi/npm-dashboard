@@ -80,7 +80,7 @@ export default function AddModal({ isOpen, onClose, onAdd, packages }) {
       height="20rem"
       buttons={
         <>
-          <button onClick={onClose}>Cancel</button>
+          <button onClick={close}>Cancel</button>
           <button
             disabled={!pkg || isLoading}
             onClick={add}
@@ -100,6 +100,7 @@ export default function AddModal({ isOpen, onClose, onAdd, packages }) {
       <p className={styles.error}>{error ? error : <span>&nbsp;</span>}</p>
       <input
         autoFocus
+        placeholder="Package name"
         ref={inputField}
         id={styles['package-input']}
         type="text"
