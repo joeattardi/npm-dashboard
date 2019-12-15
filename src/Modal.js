@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 
 import styles from './Modal.module.scss';
 
-export default function Modal({ isOpen, onClose, children, buttons, width, height }) {
+export default function Modal({ isOpen, onClose, children, buttons, maxWidth, maxHeight }) {
   return (
     <ReactModal
       closeTimeoutMS={250}
@@ -13,8 +13,10 @@ export default function Modal({ isOpen, onClose, children, buttons, width, heigh
       onRequestClose={onClose}
       style={{
         content: {
-          width,
-          height,
+          width: 'calc(100% - 120px)',
+          height: 'calc(100% - 120px)',
+          maxWidth,
+          maxHeight,
           margin: 'auto'
         }
       }}

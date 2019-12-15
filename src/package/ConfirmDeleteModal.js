@@ -36,8 +36,8 @@ export default function ConfirmDeleteModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      width="20rem"
-      height="15rem"
+      maxWidth="20rem"
+      maxHeight="15rem"
       buttons={
         <>
           <button onClick={onClose}>Cancel</button>

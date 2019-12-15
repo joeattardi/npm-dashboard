@@ -77,8 +77,8 @@ export default function AddModal({ isOpen, onClose, onAdd, packages }) {
     <Modal
       isOpen={isOpen}
       onClose={close}
-      width="25rem"
-      height="20rem"
+      maxWidth="25rem"
+      maxHeight="20rem"
       buttons={
         <>
           <button onClick={close}>Cancel</button>
