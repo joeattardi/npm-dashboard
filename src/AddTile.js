@@ -7,7 +7,7 @@ import styles from './AddTile.module.scss';
 
 export default function AddTile({ onClick }) {
   return (
-    <button onClick={onClick} id={styles['add-tile']}>
+    <button onClick={onClick} className="tile" id={styles['add-tile']}>
       <FontAwesomeIcon icon={faPlus} size="3x" />
     </button>
   )

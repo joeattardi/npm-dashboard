@@ -1,18 +1,10 @@
 .package {
-  margin: 0.75rem;
-  width: 20rem;
-  height: 16rem;
-  display: flex;
-  flex-direction: column;
-
-  background: #FFFFFF;
-  box-shadow: 0px 1px 6px 2px rgba(0, 0, 0, 0.1);
-
   &:hover {
     background: #FAFAFA;
   }
 
   .name {
+    width: calc(100% - 1rem);
     background: #3891A6;
     color: #FFFFFF;
     padding: 0.5rem;
@@ -60,6 +52,8 @@
     border-top: none;
     padding: 0.5rem;
     flex-grow: 1;
+
+    width: calc(100% - 1rem);
     
     position: relative;
 

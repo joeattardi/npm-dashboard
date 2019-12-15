@@ -16,7 +16,7 @@ export default function Package({ data, downloads, onRemoveClick }) {
   const score = data.score;
 
   return (
-    <div className={styles.package}>
+    <div className={`tile ${styles.package}`}>
       <div className={styles.name}>
         <FontAwesomeIcon icon={faCube} size="lg" /> 
         <h2><a target="_blank" rel="noopener noreferrer" href={metadata.links.npm}>{metadata.name}</a></h2>
