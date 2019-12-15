@@ -7,7 +7,7 @@ import AddModal from './AddModal';
 import AddTile from './AddTile';
 import ConfirmDeleteModal from './package/ConfirmDeleteModal';
 import Header from './Header';
-import LoadingMessage from './LoadingMessage';
+import LoadingTile from './LoadingTile';
 import Package from './package/Package';
 
 import { getDownloadStatistics, getPackageData } from './apiClient';
@@ -54,7 +54,7 @@ function App() {
   useEffect(() => {
     setPackages(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []);
   }, []);
-  
+
   useEffect(() => {
     if (packages) {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(packages));
@@ -81,14 +81,11 @@ function App() {
   }
 
   function addPackage(pkg) {
-    setPackages([
-      ...packages,
-      pkg
-    ]);
+    setPackages([...packages, pkg]);
   }
 
   function refresh() {
-    // loadData();
+    loadData();
   }
 
   return (
@@ -97,18 +94,18 @@ function App() {
         <ReactTooltip effect="solid" />
         <Header onRefresh={refresh} onAdd={() => setShowAddModal(true)} />
         <div id={styles.main}>
-          {isLoading ? (
-            <LoadingMessage />
-          ) : (
-            Object.keys(data).map(pkg => (
+          {Object.keys(data).map(pkg => (
+            isLoading ? (
+              <LoadingTile key={pkg} />
+            ) : (
               <Package
                 data={data[pkg]}
                 downloads={downloads[pkg]}
                 key={pkg}
                 onRemoveClick={() => showRemoveConfirmation(pkg)}
               />
-            ))
-          )}
+            )
+          ))}
           {!isLoading ? (
             <AddTile onClick={() => setShowAddModal(true)} />
           ) : null}
