@@ -37,9 +37,9 @@ export default function Package({ data, downloads, onRemoveClick, isAdded }) {
         </div>
         <div className={styles['section-title']}><FontAwesomeIcon size="sm" icon={faCloudDownloadAlt} /> <span>Downloads</span></div>
         <div className={styles.downloads}>
-          {downloads && downloads.lastWeek ? <DownloadCount label="Last week" count={downloads.lastWeek} /> : null}
+          {downloads && downloads.lastWeek ? <DownloadCount label="Last week" count={downloads.lastWeek} previous={downloads.previousWeek} /> : null}
           <div style={{ flexGrow: 1 }}></div>
-          {downloads && downloads.lastMonth ? <DownloadCount label="Last month" count={downloads.lastMonth} /> : null}
+          {downloads && downloads.lastMonth ? <DownloadCount label="Last month" count={downloads.lastMonth} previous={downloads.previousMonth} /> : null}
         </div>
       </div>
     </div>
