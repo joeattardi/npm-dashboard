@@ -19,7 +19,7 @@ export default function Package({ data, downloads, onRemoveClick }) {
     <div className={styles.package}>
       <div className={styles.name}>
         <FontAwesomeIcon icon={faCube} size="lg" /> 
-        <h2><a target="_blank" rel="noopener noreferrer" href={metadata.links.npm}>{metadata.name}</a></h2>
+        <h2><a target="_blank" rel="noopener noreferrer" href={metadata.links.npm}>{metadata.name}-really-long-name-that-truncates</a></h2>
         <button className={styles['close-button']} onClick={onRemoveClick}><FontAwesomeIcon icon={faTimes} /></button>
       </div>
       <div className={styles.details}>
