@@ -23,6 +23,7 @@ function App() {
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState({});
   const [downloads, setDownloads] = useState({});
+  const [skipLoad, setSkipLoad] = useState(false);
 
   const [showAddModal, setShowAddModal] = useState(false);
 
@@ -30,7 +31,7 @@ function App() {
   const [packageToDelete, setPackageToDelete] = useState(null);
 
   const loadData = useCallback(async () => {
-    if (packages && packages.length) {
+    if (packages && packages.length && !skipLoad) {
       setLoading(true);
 
       const packageData = await getPackageData(packages);
@@ -42,6 +43,8 @@ function App() {
       setLoading(false);
       ReactTooltip.rebuild();
     }
+
+    setSkipLoad(false);
   }, [packages]);
 
   useEffect(() => {
@@ -73,6 +76,7 @@ function App() {
         }, {})
     );
 
+    setSkipLoad(true);
     setPackages(packages.filter(p => p !== pkg));
   }
 
