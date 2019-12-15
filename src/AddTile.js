@@ -5,9 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './AddTile.module.scss';
 
-export default function AddTile({ onClick }) {
+export default function AddTile({ onClick, disabled }) {
+  function onTileClick(event) {
+    if (!disabled) {
+      onClick(event);
+    }
+  }
+
   return (
-    <button onClick={onClick} className="tile" id={styles['add-tile']}>
+    <button onClick={onTileClick} className="tile" id={styles['add-tile']}>
       <FontAwesomeIcon icon={faPlus} size="3x" />
     </button>
   )

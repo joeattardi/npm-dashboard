@@ -94,7 +94,7 @@ function App() {
         <ReactTooltip effect="solid" />
         <Header onRefresh={refresh} onAdd={() => setShowAddModal(true)} />
         <div id={styles.main}>
-          {Object.keys(data).map(pkg => (
+          {Object.keys(data).map(pkg =>
             isLoading ? (
               <LoadingTile key={pkg} />
             ) : (
@@ -105,10 +105,9 @@ function App() {
                 onRemoveClick={() => showRemoveConfirmation(pkg)}
               />
             )
-          ))}
-          {!isLoading ? (
-            <AddTile onClick={() => setShowAddModal(true)} />
-          ) : null}
+          )}
+
+          <AddTile onClick={() => setShowAddModal(true)} disabled={isLoading} />
         </div>
       </div>
       <ConfirmDeleteModal
