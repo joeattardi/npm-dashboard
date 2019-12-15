@@ -31,13 +31,14 @@ export default function AddModal({ isOpen, onClose, onAdd, packages }) {
   }
 
   async function validate() {
-    if (packages.indexOf(pkg) >= 0) {
-      return `Package "${pkg}" already exists in the dashboard`;
+    const packageName = pkg.trim();
+    if (packages.indexOf(packageName) >= 0) {
+      return `Package "${packageName}" already exists in the dashboard`;
     }
 
-    const result = await packageExists(pkg);
+    const result = await packageExists(packageName);
     if (!result) {
-      return `Package "${pkg}" not found`;
+      return `Package "${packageName}" not found`;
     }
   }
 
@@ -55,7 +56,7 @@ export default function AddModal({ isOpen, onClose, onAdd, packages }) {
         setIcon(faCheck);
         setIconClasses(`${styles.icon} ${styles.success}`);
         setTimeout(() => {
-          onAdd(pkg);
+          onAdd(pkg.trim());
           close();
         }, 500);
       }, 500);
