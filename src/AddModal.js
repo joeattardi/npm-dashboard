@@ -31,7 +31,7 @@ export default function AddModal({ isOpen, onClose, onAdd, packages }) {
   }
 
   async function validate() {
-    const packageName = pkg.trim();
+    const packageName = pkg.toLowerCase().trim();
     if (packages.indexOf(packageName) >= 0) {
       return `Package "${packageName}" already exists in the dashboard`;
     }
@@ -56,7 +56,7 @@ export default function AddModal({ isOpen, onClose, onAdd, packages }) {
         setIcon(faCheck);
         setIconClasses(`${styles.icon} ${styles.success}`);
         setTimeout(() => {
-          onAdd(pkg.trim());
+          onAdd(pkg.toLowerCase().trim());
           close();
         }, 500);
       }, 500);
