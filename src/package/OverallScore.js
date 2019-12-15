@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getPercentage } from "./util";
+import { getPercentage } from "../util";
 
 import styles from "./OverallScore.module.scss";
 

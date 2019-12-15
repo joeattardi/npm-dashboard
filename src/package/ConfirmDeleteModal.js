@@ -4,9 +4,9 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactModal from 'react-modal';
 
-import styles from './ConfirmationModal.module.scss';
+import styles from './ConfirmDeleteModal.module.scss';
 
-export default function ConfirmationModal({ isOpen, pkg, onClose, onConfirm }) {
+export default function ConfirmDeleteModal({ isOpen, pkg, onClose, onConfirm }) {
   function confirm() {
     onClose();
     onConfirm(pkg);

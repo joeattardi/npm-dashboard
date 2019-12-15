@@ -4,10 +4,10 @@ import ReactModal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
 
 import AddTile from './AddTile';
-import ConfirmationModal from './ConfirmationModal';
+import ConfirmDeleteModal from './package/ConfirmDeleteModal';
 import Header from './Header';
 import LoadingMessage from './LoadingMessage';
-import Package from './Package';
+import Package from './package/Package';
 
 import { getDownloadStatistics, getPackageData } from './apiClient';
 
@@ -86,7 +86,7 @@ function App() {
           {!isLoading ? <AddTile /> : null}
         </div>
       </div>
-      <ConfirmationModal
+      <ConfirmDeleteModal
         isOpen={showConfirmModal}
         onClose={() => setShowConfirmModal(false)}
         pkg={packageToDelete}

@@ -4,7 +4,7 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 
 import styles from "./Score.module.scss";
 
-import { getPercentage } from "./util";
+import { getPercentage } from "../util";
 
 export default function Score({ label, score, name }) {
   const percentage = getPercentage(score);
