@@ -32,19 +32,21 @@ function App() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [packageToDelete, setPackageToDelete] = useState(null);
 
+  async function loadData() {
+    setLoading(true);
+
+    const packageData = await getPackageData(packages);
+    setData(packageData);
+
+    const downloadsData = await getDownloadStatistics(packages);
+    setDownloads(downloadsData);
+
+    setLoading(false);
+    ReactTooltip.rebuild();
+  }
+
   useEffect(() => {
     loadData();
-
-    async function loadData() {
-      const packageData = await getPackageData(packages);
-      setData(packageData);
-
-      const downloadsData = await getDownloadStatistics(packages);
-      setDownloads(downloadsData);
-
-      setLoading(false);
-      ReactTooltip.rebuild();
-    }
   }, []);
 
   function showRemoveConfirmation(pkg) {
@@ -59,11 +61,15 @@ function App() {
     }, {}));
   }
 
+  function refresh() {
+    loadData();
+  }
+
   return (
     <>
       <div id={styles.app}>
         <ReactTooltip effect="solid" />
-        <Header />
+        <Header onRefresh={refresh} />
         <div id={styles.main}>
           {isLoading ? (
             <LoadingMessage />
