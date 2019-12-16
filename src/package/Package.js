@@ -68,12 +68,14 @@ export default function Package({ data, downloads, onRemoveClick, isAdded }) {
             <FontAwesomeIcon icon={faStar} />{' '}
             {abbreviate(data.collected.npm.starsCount, 1)}
           </div>
-          <div
-            data-tip={`${data.collected.github.starsCount.toLocaleString()} stars on GitHub`}
-          >
-            <FontAwesomeIcon icon={faGithub} />{' '}
-            {abbreviate(data.collected.github.starsCount, 1)}
-          </div>
+          {data.collected.github && (
+            <div
+              data-tip={`${data.collected.github.starsCount.toLocaleString()} stars on GitHub`}
+            >
+              <FontAwesomeIcon icon={faGithub} />{' '}
+              {abbreviate(data.collected.github.starsCount, 1)}
+            </div>
+          )}
         </div>
         <div className={styles['section-title']}>
           <FontAwesomeIcon size="sm" icon={faStar} /> <span>Score</span>
