@@ -6,6 +6,7 @@ import ReactTooltip from 'react-tooltip';
 import AddModal from './AddModal';
 import AddTile from './AddTile';
 import ConfirmDeleteModal from './package/ConfirmDeleteModal';
+import Footer from './Footer';
 import Header from './Header';
 import LoadingTile from './LoadingTile';
 import Package from './package/Package';
@@ -99,23 +100,26 @@ function App() {
       <div id={styles.app}>
         <ReactTooltip effect="solid" />
         <Header onRefresh={refresh} onAdd={() => setShowAddModal(true)} />
-        <div id={styles.main}>
-          {Object.keys(data).map(pkg =>
-            isLoading ? (
-              <LoadingTile key={pkg} />
-            ) : (
-              <Package
-                data={data[pkg]}
-                downloads={downloads[pkg]}
-                key={pkg}
-                onRemoveClick={() => showRemoveConfirmation(pkg)}
-                isAdded={addedPackage === pkg}
-              />
-            )
-          )}
+        <div id={styles['main-container']}>
+          <div id={styles.main}>
+            {Object.keys(data).map(pkg =>
+              isLoading ? (
+                <LoadingTile key={pkg} />
+              ) : (
+                <Package
+                  data={data[pkg]}
+                  downloads={downloads[pkg]}
+                  key={pkg}
+                  onRemoveClick={() => showRemoveConfirmation(pkg)}
+                  isAdded={addedPackage === pkg}
+                />
+              )
+            )}
 
-          <AddTile onClick={() => setShowAddModal(true)} disabled={isLoading} />
+            <AddTile onClick={() => setShowAddModal(true)} disabled={isLoading} />
+          </div>
         </div>
+        <Footer />
       </div>
       <ConfirmDeleteModal
         isOpen={showConfirmModal}

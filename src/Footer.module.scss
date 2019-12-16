@@ -1,0 +1,23 @@
+@import './styles/variables';
+
+#footer {
+  background: $gray-1;
+  padding: 0.5rem;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+
+  #name {
+    font-size: 0.8rem;
+    flex-grow: 1;
+  }
+
+  a {
+    color: #FFFFFF;
+    text-decoration: none;
+
+    &:hover {
+      color: lighten($gray-1, 30%);
+    }
+  }
+}

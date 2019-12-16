@@ -1,5 +1,15 @@
 @import './styles/variables';
 
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-container {
+  flex-grow: 1;
+}
+
 #main {
   padding: 0.5rem;
 
