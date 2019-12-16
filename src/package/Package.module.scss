@@ -74,6 +74,16 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      & > div {
+        margin-right: 0.5rem;
+      }
+    }
+
     .version {
       display: flex;
       font-weight: bold;

@@ -1,10 +1,17 @@
+$yellow: #FFD800;
+$gray-1: #5D737E;
+$gray-2: #4C5B5C;
+$blue-1: #3E5C76;
+$blue-2: #3891A6;
+
 $status-red: #A40802;
 $status-yellow: #FBB829;
 $status-green: #7FAF1B;
 
 $header-height: 3rem;
 
-$button-background: #5D737E;
+$button-background: $gray-1;
 $button-color: #FFFFFF;
 
 $tile-width: 22rem;
+$tile-height: 18rem;

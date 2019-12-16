@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import abbreviate from 'number-abbreviate';
 
 import { getPercentage } from '../util';
 
@@ -30,7 +31,7 @@ export default function DownloadCount({ label, count, previous }) {
     <div className={styles['download-count']}>
       <div className={styles.label}>{label}</div>
       <div className={styles.count}>
-        {count.toLocaleString()}
+        <span data-tip={count.toLocaleString()}>{abbreviate(count, 1)}</span>
         {change ? (
           <span className={`${styles.change} ${changeClassName}`} data-tip={`Previous: ${previous.toLocaleString()}`}>
             <FontAwesomeIcon icon={changeIcon} /> {changePercent}%

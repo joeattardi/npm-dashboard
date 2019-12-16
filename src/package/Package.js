@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { faCube, faCloudDownloadAlt, faStar, faTag, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faCube, faCloudDownloadAlt, faProjectDiagram, faStar, faTag, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import abbreviate from 'number-abbreviate';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Gravatar from 'react-gravatar';
 
@@ -27,6 +29,11 @@ export default function Package({ data, downloads, onRemoveClick, isAdded }) {
           <div><FontAwesomeIcon icon={faTag} size="sm" /> {metadata.version}</div>
           <div className={styles.date}>{formatDistanceToNow(new Date(metadata.date), { addSuffix: true })}</div>
           {metadata.author ? <div className={styles.avatar} data-tip={metadata.author.name}><Gravatar email={metadata.author.email} size={25} /></div> : null}
+        </div>
+        <div className={styles.meta}>
+          <div data-tip={`${data.collected.npm.dependentsCount.toLocaleString()} dependents`}><FontAwesomeIcon icon={faProjectDiagram} /> {abbreviate(data.collected.npm.dependentsCount, 1)}</div>
+          <div data-tip={`${data.collected.npm.starsCount.toLocaleString()} stars on npm`}><FontAwesomeIcon icon={faStar} /> {abbreviate(data.collected.npm.starsCount, 1)}</div>
+          <div data-tip={`${data.collected.github.starsCount.toLocaleString()} stars on GitHub`}><FontAwesomeIcon icon={faGithub} /> {abbreviate(data.collected.github.starsCount, 1)}</div>
         </div>
         <div className={styles['section-title']}><FontAwesomeIcon size="sm" icon={faStar} /> <span>Score</span></div>
         <div className={styles.scores}>
