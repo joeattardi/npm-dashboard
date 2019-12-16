@@ -32,7 +32,7 @@ export default function DownloadCount({ label, count, previous }) {
       <div className={styles.label}>{label}</div>
       <div className={styles.count}>
         <span data-tip={count.toLocaleString()}>{abbreviate(count, 1)}</span>
-        {change ? (
+        {changePercent > 0 ? (
           <span className={`${styles.change} ${changeClassName}`} data-tip={`Previous: ${previous.toLocaleString()}`}>
             <FontAwesomeIcon icon={changeIcon} /> {changePercent}%
           </span>
