@@ -10,14 +10,26 @@
   #name {
     font-size: 0.8rem;
     flex-grow: 1;
+
+    a {
+      color: #FFFFFF;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
-  a {
-    color: #FFFFFF;
-    text-decoration: none;
+  #links {
+    a {
+      margin-right: 0.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
 
-    &:hover {
-      color: lighten($gray-1, 30%);
+      &:hover {
+        color: lighten($gray-1, 30%);
+      }
     }
   }
 }
